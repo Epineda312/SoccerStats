@@ -18,7 +18,7 @@ namespace SoccerStats
         }
 
 
-
+        //Initializes stream reader with specified csv file
         public static string ReadFile(string fileName)
         {
             using (var reader = new StreamReader(fileName))
@@ -27,16 +27,34 @@ namespace SoccerStats
             }
         }
 
-        public static List<string[]> ReadSoccerResults(string fileName)
-        {
-            var soccerResults = new List<string[]>();
+        //Create list of GameResult objects
+        public static List<GameResult> ReadSoccerResults(string fileName)
+        {          
+            var soccerResults = new List<GameResult>();
             using (var reader = new StreamReader(fileName))
             {
                 string line = "";
+                reader.ReadLine();               
                 while ((line = reader.ReadLine()) != null)
                 {
-                    string[] values = line.Split(',');
-                    soccerResults.Add(values);
+                    var gameResult = new GameResult();
+                    string[] values = line.Split(',');                  
+
+                    //Parse file to receive gameDate 
+                    DateTime gameDate;
+                    if (DateTime.TryParse(values[0], out gameDate))
+                    {
+                        gameResult.GameDate = gameDate;
+                    }
+                    gameResult.TeamName = values[1];
+
+                    //Parse file to receive homeOrAway 
+                    HomeOrAway homeOrAway;
+                    if (Enum.TryParse(values[2], out homeOrAway))
+                    {
+                        gameResult.HomeOrAway = homeOrAway;
+                    }
+                    soccerResults.Add(gameResult);
                 }
             }
             return soccerResults;
