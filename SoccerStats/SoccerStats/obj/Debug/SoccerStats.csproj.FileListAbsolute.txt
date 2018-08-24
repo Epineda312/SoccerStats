@@ -1,9 +1,0 @@
-c:\users\syrup\source\repos\SoccerStats\SoccerStats\bin\Debug\data.txt
-c:\users\syrup\source\repos\SoccerStats\SoccerStats\bin\Debug\SoccerStats.exe.config
-c:\users\syrup\source\repos\SoccerStats\SoccerStats\bin\Debug\SoccerStats.exe
-c:\users\syrup\source\repos\SoccerStats\SoccerStats\bin\Debug\SoccerStats.pdb
-c:\users\syrup\source\repos\SoccerStats\SoccerStats\obj\Debug\SoccerStats.csprojAssemblyReference.cache
-c:\users\syrup\source\repos\SoccerStats\SoccerStats\obj\Debug\SoccerStats.csproj.CoreCompileInputs.cache
-c:\users\syrup\source\repos\SoccerStats\SoccerStats\obj\Debug\SoccerStats.exe
-c:\users\syrup\source\repos\SoccerStats\SoccerStats\obj\Debug\SoccerStats.pdb
-C:\Users\syrup\source\repos\SoccerStats\SoccerStats\bin\Debug\SoccerGameResults.csv
