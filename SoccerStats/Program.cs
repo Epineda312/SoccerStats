@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace SoccerStats
 {
@@ -12,25 +13,26 @@ namespace SoccerStats
     {
         static void Main(string[] args)
         {
-            string currentDirectory = Directory.GetCurrentDirectory();
-            DirectoryInfo directory = new DirectoryInfo(currentDirectory);
+            //string currentDirectory = Directory.GetCurrentDirectory();
+            //DirectoryInfo directory = new DirectoryInfo(currentDirectory);
 
-            //Specify .csv file
-            var fileName = Path.Combine(directory.FullName, "SoccerGameResults.csv");
-            var fileContents = ReadSoccerResults(fileName);
+            ////Specify .csv file
+            //var fileName = Path.Combine(directory.FullName, "SoccerGameResults.csv");
+            //var fileContents = ReadSoccerResults(fileName);
             
-            //Specify .Json file
-            fileName = Path.Combine(directory.FullName, "players.json");
-            var players = DeserializePlayers(fileName);
+            ////Specify .Json file
+            //fileName = Path.Combine(directory.FullName, "players.json");
+            //var players = DeserializePlayers(fileName);
 
-            //Retrieve top ten players, write top players stats in seperate Json file
-            var topTenPlayers = GetTopTenPlayers(players);
-            foreach(var player in topTenPlayers)
-            {
-                Console.WriteLine("Name: " + player.FirstName + " PPG: " + player.PointsPerGame);
-            }
-            fileName = Path.Combine(directory.FullName, "topten.json");
-            SerializePlayerToFile(topTenPlayers, fileName);
+            ////Retrieve top ten players, write top players stats in seperate Json file
+            //var topTenPlayers = GetTopTenPlayers(players);
+            //foreach(var player in topTenPlayers)
+            //{
+            //    Console.WriteLine("Name: " + player.FirstName + " PPG: " + player.PointsPerGame);
+            //}
+            //fileName = Path.Combine(directory.FullName, "topten.json");
+            //SerializePlayerToFile(topTenPlayers, fileName);
+            Console.WriteLine(GetGoogleHomePage());
         }
 
 
@@ -145,6 +147,18 @@ namespace SoccerStats
 
         }
 
+        
+        public static string GetGoogleHomePage()
+        {
+            var webClient = new WebClient();
+            byte[] googleHome = webClient.DownloadData("https://www.google.com");
+
+            using (var stream = new MemoryStream(googleHome))
+            using (var reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+            }
+        }
     }
 }
 
