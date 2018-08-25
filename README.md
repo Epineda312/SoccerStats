@@ -1,2 +1,2 @@
 # SoccerStats
-C# Practice
+Reading and manipulating a .csv file with C# 
