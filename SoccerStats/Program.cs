@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace SoccerStats
@@ -54,6 +49,33 @@ namespace SoccerStats
                     {
                         gameResult.HomeOrAway = homeOrAway;
                     }
+
+                    //Parse file to receive all int values
+                    int parseInt;
+                    if (int.TryParse(values[3], out parseInt))
+                    {
+                        gameResult.Goals = parseInt;
+                    }
+                    if (int.TryParse(values[4], out parseInt))
+                    {
+                        gameResult.GoalAttempts = parseInt;
+                    }
+                    if (int.TryParse(values[5], out parseInt))
+                    {
+                        gameResult.ShotsOnGoal = parseInt;
+                    }
+                    if (int.TryParse(values[6], out parseInt))
+                    {
+                        gameResult.ShotsOffGoal = parseInt;
+                    }
+
+                    //Parse file to receive PossessionPercent value
+                    double possessionPercent;
+                    if(double.TryParse(values[7], out possessionPercent))
+                    {
+                        gameResult.PossesionPercent = possessionPercent;
+                    }
+                    
                     soccerResults.Add(gameResult);
                 }
             }
@@ -61,6 +83,4 @@ namespace SoccerStats
         }
     }
 }
-
-
 
