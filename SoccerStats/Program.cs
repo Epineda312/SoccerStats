@@ -163,8 +163,7 @@ namespace SoccerStats
         //Retrieves the general news articles related to the user's search
         public static string GetNewsForPlayer(string playerName)
         {
-           // Key 1: ef726a04a5cc4d2f86c56bf9ba119cfe
-           // Key 2: ae102e604677465685683fbce73aeea7
+
 
             var webClient = new WebClient();
             webClient.Headers.Add("Ocp-Apim-Subscription-Key", "ef726a04a5cc4d2f86c56bf9ba119cfe");
