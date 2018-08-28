@@ -46,7 +46,7 @@ namespace SoccerStats
         }
 
         //Create list of GameResult objects
-        public static List<GameResult> ReadSoccerResults(string fileName)
+         public static List<GameResult> ReadSoccerResults(string fileName)
         {          
             var soccerResults = new List<GameResult>();
             using (var reader = new StreamReader(fileName))
@@ -161,22 +161,29 @@ namespace SoccerStats
         }
 
         //Retrieves the general news articles related to the user's search
-        public static string GetNewsForPlayer(string playerName)
+        public static List<NewsResult> GetNewsForPlayer(string playerName)
         {
+            // Key 1: ef726a04a5cc4d2f86c56bf9ba119cfe
+            // Key 2: ae102e604677465685683fbce73aeea7
 
-
+            var results = new List<NewsResult>();
             var webClient = new WebClient();
             webClient.Headers.Add("Ocp-Apim-Subscription-Key", "ef726a04a5cc4d2f86c56bf9ba119cfe");
             byte[] searchResults = webClient.DownloadData(string.Format("https://api.cognitive.microsoft.com/bing/v7.0/news/search?q={0}&mkt=en-us", playerName));
-
+            var serializer = new JsonSerializer();
             using (var stream = new MemoryStream(searchResults))
             using (var reader = new StreamReader(stream))
+            using(var jsonReader = new JsonTextReader(reader))
             {
-                return reader.ReadToEnd();
+               results = serializer.Deserialize<NewsSearch>(jsonReader).NewsResult;
             }
+            return results;
         }
     }
 }
+
+
+
 
 
 
