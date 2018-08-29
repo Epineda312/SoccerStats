@@ -17,7 +17,7 @@ namespace SoccerStats
     public class Sentiment
     {
         [JsonProperty(PropertyName = "id")]
-        public string ID { get; set; }
+        public string Id { get; set; }
         [JsonProperty(PropertyName = "score")]
         public string Score { get; set; }
     }

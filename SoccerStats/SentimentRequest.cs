@@ -10,7 +10,7 @@ namespace SoccerStats
 
     public class SentimentRequest
     {
-        [JsonProperty(PropertyName = "document")]
+        [JsonProperty(PropertyName = "documents")]
         public List<Document> Documents { get; set; }
     }
 
