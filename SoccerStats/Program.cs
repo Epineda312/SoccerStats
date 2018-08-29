@@ -13,26 +13,30 @@ namespace SoccerStats
     {
         static void Main(string[] args)
         {
-            //string currentDirectory = Directory.GetCurrentDirectory();
-            //DirectoryInfo directory = new DirectoryInfo(currentDirectory);
+            string currentDirectory = Directory.GetCurrentDirectory();
+            DirectoryInfo directory = new DirectoryInfo(currentDirectory);
 
-            ////Specify .csv file
-            //var fileName = Path.Combine(directory.FullName, "SoccerGameResults.csv");
-            //var fileContents = ReadSoccerResults(fileName);
-            
-            ////Specify .Json file
-            //fileName = Path.Combine(directory.FullName, "players.json");
-            //var players = DeserializePlayers(fileName);
+            //Specify .csv file
+            var fileName = Path.Combine(directory.FullName, "SoccerGameResults.csv");
+            var fileContents = ReadSoccerResults(fileName);
 
-            ////Retrieve top ten players, write top players stats in seperate Json file
-            //var topTenPlayers = GetTopTenPlayers(players);
-            //foreach(var player in topTenPlayers)
-            //{
-            //    Console.WriteLine("Name: " + player.FirstName + " PPG: " + player.PointsPerGame);
-            //}
-            //fileName = Path.Combine(directory.FullName, "topten.json");
-            //SerializePlayerToFile(topTenPlayers, fileName);
-            Console.WriteLine(GetNewsForPlayer("Diego Valeri"));
+            //Specify .Json file
+            fileName = Path.Combine(directory.FullName, "players.json");
+            var players = DeserializePlayers(fileName);
+
+            //Retrieve top ten players, write top players stats in seperate Json file
+            var topTenPlayers = GetTopTenPlayers(players);
+            foreach (var player in topTenPlayers)
+            {
+                List<NewsResult> newsResults = GetNewsForPlayer(string.Format("{0} {1}", player.FirstName, player.LastName));
+                foreach(var result in newsResults)
+                {
+                    Console.WriteLine(string.Format("Date: {0:f}, Headline: {1}, Summary: {2} \r\n", result.DatePublished, result.Headline, result.Summary));
+                    Console.ReadKey();
+                }
+            }
+            fileName = Path.Combine(directory.FullName, "topten.json");
+            SerializePlayerToFile(topTenPlayers, fileName);
         }
 
 
@@ -175,15 +179,12 @@ namespace SoccerStats
             using (var reader = new StreamReader(stream))
             using(var jsonReader = new JsonTextReader(reader))
             {
-               results = serializer.Deserialize<NewsSearch>(jsonReader).NewsResult;
+               results = serializer.Deserialize<NewsSearch>(jsonReader).NewsResults;
             }
             return results;
         }
     }
 }
-
-
-
 
 
 
